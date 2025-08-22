@@ -9,16 +9,10 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        int c=0;
-        map<ListNode* ,int>m;
         while(head){
-            if(m.find(head)!=m.end()){
-                break;
-            }else{
-                m[head]=c;
-            }
+            if(head->val==INT_MAX)break;
+            head->val=INT_MAX;
             head=head->next;
-            c++;
         }
         return head;
     }
