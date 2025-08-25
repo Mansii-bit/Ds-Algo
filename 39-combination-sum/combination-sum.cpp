@@ -1,6 +1,10 @@
 class Solution {
 public:
 void solve(vector<int>cnd,int n,int target,vector<vector<int>> &ans,vector<int>&temp,int ind){
+    if(target==0){
+        ans.push_back(temp);
+        return;
+    }
     if(ind==n){
         if(target==0) ans.push_back(temp);
         return;
