@@ -10,15 +10,11 @@ void solve(vector<int>cnd,int n,int target,vector<vector<int>> &ans,vector<int>&
         return;
     }
     if(target>=cnd[ind]){
-        target-=cnd[ind];
         temp.push_back(cnd[ind]);
-        solve(cnd,n,target,ans,temp,ind);
-        target+=cnd[ind];
+        solve(cnd,n,target-cnd[ind],ans,temp,ind);
         temp.pop_back();
-         solve(cnd,n,target,ans,temp,ind+1);
-    }else{
-         solve(cnd,n,target,ans,temp,ind+1);
     }
+    solve(cnd,n,target,ans,temp,ind+1);
 }
     vector<vector<int>> combinationSum(vector<int>& cnd, int target) {
         int n =cnd.size();
