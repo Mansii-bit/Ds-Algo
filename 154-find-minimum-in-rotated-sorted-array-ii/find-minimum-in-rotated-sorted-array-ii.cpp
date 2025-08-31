@@ -3,21 +3,17 @@ public:
 void solve(vector<int> nums , int low , int high , int &ans){
     if(low>high)return;
    int mid=(low+high)/2;
-    if(nums[low]<nums[mid]){
+    if(nums[low]<nums[mid]  && nums[mid]>=nums[high]){
         ans=min(ans,nums[low]);
         solve(nums,mid+1,high,ans);
-    }
-    else{
-        ans=min(ans,nums[mid]);
-      solve(nums,low,mid-1,ans);  
-    } 
-    if(nums[mid]<nums[high]){
+    }else if(nums[mid]<nums[high] && nums[low]>=nums[mid]){
         ans=min(ans,nums[mid]);
         solve(nums,low,mid-1,ans);
     }
-    else {
-        ans=min(ans,nums[high]);
+    else{
+        ans=min(ans,nums[mid]);
         solve(nums,mid+1,high,ans);
+        solve(nums,low,mid-1,ans);
     }
 }
     int findMin(vector<int>& nums) {
