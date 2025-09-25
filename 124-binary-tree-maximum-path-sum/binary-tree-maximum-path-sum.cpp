@@ -11,19 +11,16 @@
  */
 class Solution {
 public:
-int maxSum=-1e9;
-int solve(TreeNode* root){
+ int solve(TreeNode* root , int &maxSum){
     if(!root)return 0;
-    int leftsum=root->val+solve(root->left);
-    // cout<<leftsum<<endl;
-    int rightsum=root->val+solve(root->right);
-    // cout<<rightsum<<endl;
-    maxSum=max({leftsum,rightsum,maxSum,leftsum+rightsum-root->val,root->val});
-    cout<<maxSum<<endl;
-    return max({leftsum,rightsum,root->val});
-}
+    int leftSum=max(0,solve(root->left,maxSum));
+    int rightSum=max(0,solve(root->right,maxSum));
+    maxSum=max(maxSum,(leftSum+rightSum+root->val));
+    return root->val+max(leftSum,rightSum);
+ }
     int maxPathSum(TreeNode* root) {
-        solve(root);
+        int maxSum=-1e9;
+        solve(root,maxSum);
         return maxSum;
     }
 };
