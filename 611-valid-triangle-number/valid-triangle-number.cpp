@@ -1,27 +1,21 @@
 class Solution {
 public:
-    static int triangleNumber(vector<int>& nums) {
+    int triangleNumber(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        int n=nums.size(), ans=0;
-        for(int i=2; i<n; i++){
-            int l=0, r=i-1;
-            while(l<r){
-                if(nums[l]+nums[r]>nums[i]){
-                    ans+=r-l;
-                    r--;
+        int n = nums.size();
+        int count = 0;
+
+        for (int i = n - 1; i >= 2; i--) {
+            int left = 0, right = i - 1;
+            while (left < right) {
+                if (nums[left] + nums[right] > nums[i]) {
+                    count += right - left;
+                    right--;
+                } else {
+                    left++;
                 }
-                else l++;
             }
         }
-        return ans;
+        return count;
     }
 };
-
-
-auto init = []()
-{ 
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
-    return 'c';
-}();
