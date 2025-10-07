@@ -26,24 +26,22 @@ public:
 
         for (int i = 0; i < n; i++) {
             int lake = rain[i];
+            if (lake == 0) continue;
 
-            if (lake != 0) {
-                res[i] = -1;
-                uf.unite(i);
+            res[i] = -1;
+            uf.unite(i);
 
-                if (map.find(lake) != map.end()) {
-                    int prev = map[lake];
-                    int dry = uf.find(prev + 1);
+            if (map.find(lake) != map.end()) {
+                int prev = map[lake];
+                int dry = uf.find(prev + 1);
 
-                    if (dry >= i)
-                        return {};
+                if (dry >= i) return {};
 
-                    res[dry] = lake;
-                    uf.unite(dry);
-                    map[lake] = i;
-                } else {
-                    map[lake] = i;
-                }
+                res[dry] = lake;
+                uf.unite(dry);
+                map[lake] = i;
+            } else {
+                map[lake] = i;
             }
         }
 
