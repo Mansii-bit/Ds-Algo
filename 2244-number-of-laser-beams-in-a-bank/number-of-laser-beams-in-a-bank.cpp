@@ -1,16 +1,14 @@
 class Solution {
 public:
     int numberOfBeams(vector<string>& bank) {
-        int total=0;
-        int prev=0;
-        for( string s : bank){
-            s.erase(remove(s.begin(),s.end(),'0'),s.end());
-            int curr=s.size();
-            if(curr>0) {
-                total+=(prev*curr);
-                prev=curr;
+        int prev = 0, ans = 0;
+        for (auto &row : bank) {
+            int cur = count(row.begin(), row.end(), '1');
+            if (cur > 0) {
+                ans += prev * cur;
+                prev = cur;
             }
         }
-        return total;
+        return ans;
     }
 };
