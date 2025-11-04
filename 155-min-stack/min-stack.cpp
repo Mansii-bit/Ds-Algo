@@ -1,34 +1,28 @@
 class MinStack {
 public:
-vector<int> st;
-vector<int> minvec;
-using ll = long long;
-int mini=1e9;
+vector<pair<int,int>> st;
     MinStack() {
         
     }
     
     void push(int val) {
-        st.push_back(val);
-        minvec.push_back(val);
-        // mini=min(mini,val);
+        if(st.size()==0)st.push_back({val,val});
+        else{
+            st.push_back({val,min(val,st.back().second)});
+        }
     }
     
     void pop() {
-        // if(st.back()==mini)mini=minvec.back();
-        minvec.pop_back();
         st.pop_back();
     }
     
     int top() {
 
-        return st.back();
+        return st.back().first;
     }
     
     int getMin() {
-        ll mini=INT_MAX;
-        for(ll i : minvec) mini=min(mini,i);
-        return mini;
+        return st.back().second;
     }
 };
 
