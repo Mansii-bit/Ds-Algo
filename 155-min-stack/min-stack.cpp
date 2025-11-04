@@ -2,6 +2,7 @@ class MinStack {
 public:
 vector<int> st;
 vector<int> minvec;
+using ll = long long;
 int mini=1e9;
     MinStack() {
         
@@ -25,8 +26,8 @@ int mini=1e9;
     }
     
     int getMin() {
-        int mini=pow(2,31) -1;
-        for(int i : minvec) mini=min(mini,i);
+        ll mini=INT_MAX;
+        for(ll i : minvec) mini=min(mini,i);
         return mini;
     }
 };
