@@ -4,7 +4,7 @@ public:
         int n=nums2.size();
         stack<int>st;
         vector<int>nge(n);
-        map<int,int>mapy;
+        unordered_map<int,int>mapy;
         for(int i=n-1;i>=0;i--){
             mapy[nums2[i]]=i;
             while(!st.empty() && st.top()<=nums2[i]) st.pop();
