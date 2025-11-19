@@ -12,7 +12,6 @@ public:
                 l++;
             }
             ans=max(ans,r-l+1);
-            cout<<s.substr(l,r-l+1)<<endl;
             r++;
         }
         return ans;
