@@ -1,20 +1,21 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
+        int l=0,r=0;
         int n=s.size();
+        unordered_map<char,int>mapy;
         int ans=0;
-        set<char>s1;
-        for(int i=0;i<n;i++){
-            s1.insert(s[i]);
-            for(int j=i+1;j<n;j++){
-                if(s1.count(s[j])==1){
-                    break;
-                }
-                s1.insert(s[j]);
+        while(l<n && r<n){
+            mapy[s[r]]++;
+            while(l<n && mapy[s[r]]>1){
+                mapy[s[l]]--;
+                l++;
             }
-            ans=max(ans,(int)s1.size());
-            s1.clear();
+            ans=max(ans,r-l+1);
+            cout<<s.substr(l,r-l+1)<<endl;
+            r++;
         }
         return ans;
+
     }
 };
