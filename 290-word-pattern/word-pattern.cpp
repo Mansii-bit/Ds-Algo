@@ -37,6 +37,6 @@ public:
         // }
         // return n==cnt;
 
-        return j==pattern.size()-1 ? true : mapy.size()==sett.size();
+        return j==pattern.size()-1 ? true : false;
     }
 };
