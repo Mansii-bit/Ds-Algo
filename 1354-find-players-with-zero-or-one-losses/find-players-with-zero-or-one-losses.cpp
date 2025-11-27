@@ -18,7 +18,6 @@ public:
         vector<int>one;
         vector<int>zero;
         for(auto x: mapy){
-            cout<<x.first<<" : "<<x.second<<"\n";
             if(x.second>0)zero.push_back(x.first);
             if(x.second==-1)one.push_back(x.first);
         }
