@@ -1,47 +1,52 @@
 class Solution {
 public:
-int largestRectangleArea(vector<int>& nums) {
-        int n=nums.size();
-        stack<int>st;
-        int ans=-1;
-        for(int i=0;i<n;i++){
-            while(!st.empty() && nums[st.top()]>nums[i]){
-                int nse=i;
-                int h =nums[st.top()];
+long long PSEE(vector<int>& arr, int n) {
+    int ans=0;
+        stack<int> st;
+        for (int i = 0; i < n; i++) {
+            while (!st.empty() && arr[st.top()] > arr[i]) {
+                int main=arr[st.top()];
                 st.pop();
-                int pse= st.empty()? -1 : st.top();
-                ans=max(ans,((nse-pse-1)*h));
+                int nse=i;
+                int pse = st.empty() ? -1 : st.top();
+                int res=main*(nse-pse-1);
+                ans=max(ans,res);
             }
             st.push(i);
         }
-        while(!st.empty()){
-            int nse=n;
-            int h= nums[st.top()];
-            st.pop();
-            int pse=st.empty()?-1:st.top();
-            ans=max(ans,((nse-pse-1)*h));
-        }
+         while(!st.empty()){
+            int main=arr[st.top()];
+                st.pop();
+                int nse=n;
+                int pse = st.empty() ? -1 : st.top();
+                int res=main*(nse-pse-1);
+                ans=max(ans,res);
+         }
         return ans;
     }
+    int largestRectangleArea(vector<int>arr) {
+        int n = arr.size();
+        long long res = 0;
+        res = PSEE(arr, n);
+        return res;
+        
+    }
     int maximalRectangle(vector<vector<char>>& matrix) {
-        int ans=-1;
-        int m=matrix.size();
-        int n=matrix[0].size();
-        vector<vector<int>> psum(m);
-       
-        for(int j =0;j<n;j++){
-            int sum=0;
-            for(int i =0; i<m;i++){
-                if(matrix[i][j]=='1') sum++;
-                else sum=0;
-                psum[i].push_back(sum);
-            }
+       int n=matrix.size();
+       int m=matrix[0].size();
+       int MaxArea=0;
+       vector<vector<int>> psum(n, vector<int>(m, 0));
+       for(int j=0;j<m;j++){
+        int sum=0;
+        for(int i=0;i<n;i++){
+            sum+=(matrix[i][j]-'0');
+            if(matrix[i][j]=='0')sum=0;
+            psum[i][j]=sum;
         }
-         for(int j =0;j<m;j++){
-            int a=largestRectangleArea(psum[j]);
-            ans=max(a,ans);
-        }
-
-        return ans;
+       }
+       for(int i=0;i<n;i++){
+        MaxArea=max(MaxArea,largestRectangleArea(psum[i]));
+       }
+       return MaxArea;
     }
 };
